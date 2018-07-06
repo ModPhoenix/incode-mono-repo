@@ -1,0 +1,53 @@
+.task-card {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.task-card-view {
+  display: flex;
+}
+
+.task-container-btn {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.task-container-btn button {
+  margin-right: 10px;
+}
+
+.task-container-btn button:last-child {
+  margin-right: 0;
+}
+
+.task-id {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.task-content {
+  flex-grow: 3;
+}
+
+.task-status {
+  flex-grow: 1;
+}
+
+.task-status {
+  width: 120px;
+}
+
+.task-title {
+  text-decoration: none;
+  transition: 200ms;
+}
+
+.task-title:hover {
+  opacity: 0.5;
+}
+
+.task-link {
+  text-decoration: none;
+}

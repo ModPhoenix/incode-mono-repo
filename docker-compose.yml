@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+
+  client-app:
+        container_name: client-app
+        build:
+          context: ./client
+          dockerfile: Dockerfile
+        volumes:
+          - '/usr/src/app/'
+          - '/usr/src/app/node_modules/'
+        ports:
+          - '3000:3000'
+        environment:
+          - NODE_ENV=development
+
+  server-app:
+      container_name: server-app
+      build:
+        context: ./server
+        dockerfile: Dockerfile
+      volumes:
+        - '/usr/src/app/'
+        - '/usr/src/app/node_modules/'
+      ports:
+        - '8080:8080'
+      environment:
+        - NODE_ENV=development

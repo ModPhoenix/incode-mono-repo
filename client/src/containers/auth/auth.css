@@ -1,0 +1,14 @@
+.registration-page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.registration-page-form {
+  padding: 20px;
+}
+
+.auth-link {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+}

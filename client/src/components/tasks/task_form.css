@@ -1,0 +1,18 @@
+.task-add {
+  max-width: 900px;
+  padding: 20px;
+  margin: 0 auto 20px;
+}
+
+.task-add-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-add-form > div {
+  margin-bottom: 15px;
+}
+
+.task-add-form > div:last-child {
+  margin-bottom: 0;
+}
