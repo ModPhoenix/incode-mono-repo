@@ -3,14 +3,6 @@ import settings from '../settings';
 
 import { authHeader } from '../_helpers';
 
-export const userService = {
-  signUp,
-  login,
-  logout,
-  getUser,
-  editUserProfile,
-};
-
 axios.defaults.baseURL = settings.domain;
 
 function signUp(email, password) {
@@ -61,12 +53,10 @@ function editUserProfile(userId, newProfile) {
   });
 }
 
-// function handleResponse(error) {
-//
-//   if (error.response.status === 401 && error.response.status === 403) {
-//     logout();
-//     document.location.reload(true);
-//   }
-//
-//   return error;
-// }
+export const userService = {
+  signUp,
+  login,
+  logout,
+  getUser,
+  editUserProfile,
+};

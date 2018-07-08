@@ -26,3 +26,11 @@ body {
   border-bottom: 1px solid #000000de;
   outline: none;
 }
+
+.not-found-page {
+  text-align: center;
+}
+
+.not-found-page h1 {
+  margin: 30px auto;
+}

@@ -82,7 +82,7 @@ class TaskCard extends Component {
                       {data.title}
                     </Typography>
                   </Link>
-                  <Typography component="p">
+                  <Typography component="p" className="task-description">
                     {data.description}
                   </Typography>
                 </CardContent>
@@ -129,10 +129,15 @@ class TaskCard extends Component {
   }
 }
 
+TaskCard.defaultProps = {
+  isSuperuser: false,
+};
+
 TaskCard.propTypes = {
   data: PropTypes.object.isRequired,
   editTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
+  isSuperuser: PropTypes.bool,
 };
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Switch, Route } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import PropTypes from 'prop-types';
 
@@ -17,6 +17,7 @@ import TasksPage from '../containers/tasks/tasks_page';
 import TaskDetailPage from '../containers/tasks/task_details_page';
 import RegistrationPage from '../containers/auth/registration.page';
 import LoginPage from '../containers/auth/login.page';
+import NotFoundPage from './404.page';
 import styles from './theme';
 import { history } from '../_helpers';
 
@@ -46,11 +47,14 @@ const Layout = (props) => {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <div>
-              <PrivateRoute exact path="/" component={TasksPage} />
-              <PrivateRoute exact path="/task/:id" component={TaskDetailPage} />
-              <PrivateRoute exact path="/profile" component={Profile} />
-              <Route exact path="/registration" component={RegistrationPage} />
-              <Route exact path="/login" component={LoginPage} />
+              <Switch>
+                <PrivateRoute exact path="/" component={TasksPage} />
+                <PrivateRoute exact path="/task/:id" component={TaskDetailPage} />
+                <PrivateRoute exact path="/profile" component={Profile} />
+                <Route exact path="/registration" component={RegistrationPage} />
+                <Route exact path="/login" component={LoginPage} />
+                <Route exact path="*" component={NotFoundPage} />
+              </Switch>
             </div>
           </main>
         </div>

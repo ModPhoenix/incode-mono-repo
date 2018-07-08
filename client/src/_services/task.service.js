@@ -1,19 +1,38 @@
 import axios from 'axios';
-import settings from '../settings';
 
-import { authHeader } from '../_helpers';
+import { authHeader, config } from '../_helpers';
 
-export const taskService = {
-  editTask,
-  deleteTask,
-};
+function feachTasks() {
+  const request = axios.create({
+    headers: authHeader(),
+  }, config);
 
-axios.defaults.baseURL = settings.domain;
+  return request.get('/task');
+}
+
+function feachTask(id) {
+  const request = axios.create({
+    headers: authHeader(),
+  }, config);
+
+  return request.get(`/task/${id}`);
+}
+
+function addTask(task) {
+  const request = axios.create({
+    headers: authHeader(),
+  }, config);
+
+  return request.post('/task', {
+    ...task,
+    status: 'To do',
+  });
+}
 
 function editTask(taskId, task) {
   const request = axios.create({
     headers: authHeader(),
-  });
+  }, config);
 
   return request.put(`/task/${taskId}`, {
     ...task,
@@ -23,7 +42,15 @@ function editTask(taskId, task) {
 function deleteTask(taskId) {
   const request = axios.create({
     headers: authHeader(),
-  });
+  }, config);
 
   return request.delete(`/task/${taskId}`);
 }
+
+export const taskService = {
+  feachTasks,
+  feachTask,
+  addTask,
+  editTask,
+  deleteTask,
+};

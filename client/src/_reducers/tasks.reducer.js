@@ -1,13 +1,3 @@
-import {
-  LOAD_TASKS,
-  LOAD_TASKS_SUCCESS,
-  LOAD_TASKS_FAIL,
-  LOAD_TASK_DETAIL,
-  TASK_ADD,
-  TASK_ADD_SUCCESS,
-  TASK_ADD_FAIL,
-} from '../_actions/action_tasks';
-
 import { taskConstants } from '../_constants';
 
 const initialState = {
@@ -23,44 +13,55 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case LOAD_TASKS:
+    case taskConstants.FETCH_TASKS_REQUEST:
       return {
         ...state,
         isFetching: true,
         didInvalidate: false,
       };
-    case LOAD_TASKS_SUCCESS:
+    case taskConstants.FETCH_TASKS_SUCCESS:
       return {
         ...state,
         isFetching: false,
         didInvalidate: false,
         data: action.payload,
       };
-    case LOAD_TASKS_FAIL:
+    case taskConstants.FETCH_TASKS_FAILURE:
       return {
         ...state,
         isFetching: false,
         didInvalidate: true,
       };
-    case LOAD_TASK_DETAIL:
+    case taskConstants.FETCH_TASK_REQUEST:
       return {
         ...state,
+        isFetchingTask: true,
+      };
+    case taskConstants.FETCH_TASK_SUCCESS:
+      return {
+        ...state,
+        isFetchingTask: false,
         detail: action.payload,
       };
-    case TASK_ADD:
+    case taskConstants.FETCH_TASK_FAILURE:
+      return {
+        ...state,
+        isFetchingTask: false,
+        isFetchingTaskError: action.payload,
+      };
+    case taskConstants.ADD_TASK_REQUEST:
       return {
         ...state,
         isTaskSending: true,
         isTaskSendingErr: false,
       };
-    case TASK_ADD_SUCCESS:
+    case taskConstants.ADD_TASK_SUCCESS:
       return {
         ...state,
         isTaskSending: false,
-        isTaskSendingErr: false,
-        data: [action.payload, ...state.data],
+        data: [...state.data, action.payload],
       };
-    case TASK_ADD_FAIL:
+    case taskConstants.ADD_TASK_FAILURE:
       return {
         ...state,
         isTaskSending: false,

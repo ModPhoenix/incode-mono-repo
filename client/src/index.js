@@ -7,7 +7,6 @@ import thunk from 'redux-thunk';
 
 import './index.css';
 import App from './components/app';
-import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './_reducers';
 import { userActions } from './_actions/actions_user';
 
@@ -25,4 +24,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
-registerServiceWorker();

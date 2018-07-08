@@ -6,14 +6,14 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import TaskCard from '../../components/tasks/task_card';
-import { editTask, fetchTaskDetail, deleteTask } from '../../_actions/action_tasks';
+import { editTask, fetchTask, deleteTask } from '../../_actions/action_tasks';
 import { fetchComments, addComment } from '../../_actions/actions_comments';
 // import CommentsList from '../comments/comments_list';
 // import CommentAdd from '../../components/comments/comment_add';
 
 const TaskActionCreators = {
   editTask,
-  fetchTaskDetail,
+  fetchTask,
   fetchComments,
   addComment,
   deleteTask,
@@ -31,24 +31,12 @@ class TaskDetailPage extends Component {
     this.handleChangeStatus = this.handleChangeStatus.bind(this);
   }
 
-  static defaultProps = {
-    task: {
-      _id: "",
-      title: "",
-      description: "",
-      status: "",
-    },
-    onLoad: function () {},
-    onChangeStatus: function () {},
-    addNewComment: function () {},
-  };
-
   componentDidMount() {
     const { dispatch, match } = this.props;
 
-    const actionFetchTaskDetail = TaskActionCreators.fetchTaskDetail(match.params.id);
+    const actionFetchTask = TaskActionCreators.fetchTask(match.params.id);
     // const actionFetchComments = TaskActionCreators.fetchComments();
-    dispatch(actionFetchTaskDetail);
+    dispatch(actionFetchTask);
     // dispatch(actionFetchComments);
   }
 
@@ -64,9 +52,9 @@ class TaskDetailPage extends Component {
   }
 
   render() {
-    const { task } = this.props;
+    const { task, isFetchingTask, isSuperuser } = this.props;
 
-    if (task === null) {
+    if (isFetchingTask) {
       return (
         <CircularProgress />
       );
@@ -76,6 +64,7 @@ class TaskDetailPage extends Component {
       <div className="task-detail-page">
         <TaskCard
           data={task}
+          isSuperuser={isSuperuser}
           statusCallback={this.handleChangeStatus}
           {...this.boundActionCreators}
         />
@@ -86,17 +75,35 @@ class TaskDetailPage extends Component {
   }
 }
 
+TaskDetailPage.defaultProps = {
+  task: {
+    _id: '',
+    title: '',
+    description: '',
+    status: '',
+  },
+  isFetchingTask: true,
+  isSuperuser: false,
+  onLoad: () => {},
+  onChangeStatus: () => {},
+  addNewComment: () => {},
+};
 
 TaskDetailPage.propTypes = {
-  task: PropTypes.object.isRequired,
-  onLoad: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  task: PropTypes.object,
+  onLoad: PropTypes.func,
   match: PropTypes.object.isRequired,
-  onChangeStatus: PropTypes.func.isRequired,
-  addNewComment: PropTypes.func.isRequired,
+  onChangeStatus: PropTypes.func,
+  addNewComment: PropTypes.func,
+  isFetchingTask: PropTypes.bool,
+  isSuperuser: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   task: state.tasks.detail,
+  isFetchingTask: state.tasks.isFetchingTask,
+  isSuperuser: state.auth.user.isSuperuser,
 });
 
 export default connect(mapStateToProps)(TaskDetailPage);

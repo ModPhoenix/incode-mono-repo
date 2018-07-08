@@ -9,12 +9,17 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import TaskCard from '../../components/tasks/task_card';
 import TaskForm from '../../components/tasks/task_form';
-import { editTask, fetchTasks, sendTask, deleteTask } from '../../_actions/action_tasks';
+import {
+  editTask,
+  fetchTasks,
+  addTask,
+  deleteTask,
+} from '../../_actions/action_tasks';
 
 const TaskActionCreators = {
   editTask,
   fetchTasks,
-  sendTask,
+  addTask,
   deleteTask,
 };
 
@@ -28,24 +33,19 @@ class TasksPage extends Component {
     this.onSave = this.onSave.bind(this);
   }
 
-  static defaultProps = {
-    onChangeStatus: function () {},
-    loadTasks: function () {},
-  };
-
   componentDidMount() {
-    let { dispatch } = this.props;
+    const { dispatch } = this.props;
 
     const action = TaskActionCreators.fetchTasks();
     dispatch(action);
   }
 
   onSave(values) {
-    let { dispatch } = this.props;
+    const { dispatch } = this.props;
 
-    const action = TaskActionCreators.sendTask(values.title, values.description);
+    const action = TaskActionCreators.addTask(values);
     dispatch(action);
-    dispatch(reset('task_add'));
+    dispatch(reset('task_form'));
   }
 
   renderTaskList() {
@@ -81,7 +81,7 @@ class TasksPage extends Component {
         <Typography variant="display1" gutterBottom>
           Your tasks
         </Typography>
-        { isSuperuser ? <TaskForm formAction='add' onSubmit={this.onSave} /> : false }
+        { isSuperuser ? <TaskForm formAction="add" onSubmit={this.onSave} /> : false }
         <div className="tasks-list">
           {this.renderTaskList()}
         </div>
@@ -90,13 +90,19 @@ class TasksPage extends Component {
   }
 }
 
+TasksPage.defaultProps = {
+  onChangeStatus: () => {},
+  loadTasks: () => {},
+};
+
 TasksPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   tasks: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   didInvalidate: PropTypes.bool.isRequired,
   isSuperuser: PropTypes.bool.isRequired,
-  onChangeStatus: PropTypes.func.isRequired,
-  loadTasks: PropTypes.func.isRequired,
+  onChangeStatus: PropTypes.func,
+  loadTasks: PropTypes.func,
 };
 
 const mapStateToProps = state => ({

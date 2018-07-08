@@ -83,6 +83,10 @@ class ProfilePage extends Component {
   }
 }
 
+ProfilePage.defaultProps = {
+  user: {},
+};
+
 ProfilePage.propTypes = {
   user: PropTypes.object,
   onSubmitProfileForm: PropTypes.func.isRequired,

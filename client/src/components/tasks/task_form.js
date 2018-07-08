@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import './task_form.css';
@@ -23,49 +23,48 @@ const formActionTypes = {
   edit: 'edit',
 };
 
-class TaskForm extends Component {
-  render() {
-    const {
-      pristine, submitting, handleSubmit, formAction,
-    } = this.props;
-    return (
-      <Paper className="task-add">
-        <Typography variant="title" gutterBottom>
+let TaskForm = (props) => {
+  const {
+    pristine, submitting, handleSubmit, formAction,
+  } = props;
+
+  return (
+    <Paper className="task-add">
+      <Typography variant="title" gutterBottom>
+        { formAction === formActionTypes.add
+          ? addTaskText.title : editTaskText.title }
+      </Typography>
+      <form onSubmit={handleSubmit} noValidate autoComplete="off" className="task-add-form">
+        <Field
+          name="title"
+          component={TextField}
+          type="text"
+          className="task-field"
+          label="Task title"
+        />
+        <Field
+          name="description"
+          multiline
+          rows={4}
+          component={TextField}
+          type="text"
+          className="task-field"
+          label="Task description"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          className="task-submit-btn"
+          disabled={pristine || submitting}
+        >
           { formAction === formActionTypes.add
-            ? addTaskText.title : editTaskText.title }
-        </Typography>
-        <form onSubmit={handleSubmit} noValidate autoComplete="off" className="task-add-form">
-          <Field
-            name="title"
-            component={TextField}
-            type="text"
-            className="task-field"
-            label="Task title"
-          />
-          <Field
-            name="description"
-            multiline
-            rows={4}
-            component={TextField}
-            type="text"
-            className="task-field"
-            label="Task description"
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className="task-submit-btn"
-            disabled={pristine || submitting}
-          >
-            { formAction === formActionTypes.add
-              ? addTaskText.SubmitBtn : editTaskText.SubmitBtn }
-          </Button>
-        </form>
-      </Paper>
-    );
-  }
-}
+            ? addTaskText.SubmitBtn : editTaskText.SubmitBtn }
+        </Button>
+      </form>
+    </Paper>
+  );
+};
 
 TaskForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,

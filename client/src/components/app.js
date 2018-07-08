@@ -3,7 +3,6 @@ import './app.css';
 import { connect } from 'react-redux';
 
 import Layout from './layout';
-import { changedTaskStatus } from '../_actions/action_tasks';
 
 const classes = {
   root: 'container',
@@ -39,13 +38,4 @@ const App = () => (
   </div>
 );
 
-const mapDispatchToProps = dispatch => ({
-  onChangeStatus: (id, status) => {
-    dispatch(changedTaskStatus(id, status));
-  },
-});
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(App);
+export default connect()(App);

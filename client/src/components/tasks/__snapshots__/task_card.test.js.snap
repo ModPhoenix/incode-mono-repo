@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly 1`] = `
+<WithStyles(Card)
+  className="task-card"
+>
+  <div
+    className="task-card-view"
+  >
+    <WithStyles(Typography)
+      className="task-id"
+      gutterBottom={true}
+      variant="caption"
+    >
+      ID:
+       
+      5b39e7e11deb0934993043cc
+    </WithStyles(Typography)>
+    <WithStyles(CardContent)
+      className="task-content"
+    >
+      <Link
+        className="task-link"
+        replace={false}
+        to="/task/5b39e7e11deb0934993043cc"
+      >
+        <WithStyles(Typography)
+          className="task-title"
+          component="h2"
+          gutterBottom={true}
+          variant="headline"
+        >
+          Mock Title
+        </WithStyles(Typography)>
+      </Link>
+      <WithStyles(Typography)
+        className="task-description"
+        component="p"
+      >
+        Mock Description
+      </WithStyles(Typography)>
+    </WithStyles(CardContent)>
+    <WithStyles(CardActions)>
+      <WithStyles(FormControl)
+        className="task-status"
+      >
+        <WithStyles(Select)
+          className="task-status-select"
+          displayEmpty={true}
+          name="task_status"
+          onChange={[Function]}
+          value="To do"
+        >
+          <WithStyles(MenuItem)
+            key="To do"
+            value="To do"
+          >
+            To do
+          </WithStyles(MenuItem)>
+          <WithStyles(MenuItem)
+            key="In Progress"
+            value="In Progress"
+          >
+            In Progress
+          </WithStyles(MenuItem)>
+          <WithStyles(MenuItem)
+            key="Peer Review"
+            value="Peer Review"
+          >
+            Peer Review
+          </WithStyles(MenuItem)>
+          <WithStyles(MenuItem)
+            key="Completed"
+            value="Completed"
+          >
+            Completed
+          </WithStyles(MenuItem)>
+        </WithStyles(Select)>
+      </WithStyles(FormControl)>
+    </WithStyles(CardActions)>
+  </div>
+  <div
+    className="task-container-btn"
+  >
+    <WithStyles(Button)
+      color="primary"
+      onClick={[Function]}
+      size="small"
+      variant="contained"
+    >
+      Edit
+    </WithStyles(Button)>
+    <WithStyles(Button)
+      color="secondary"
+      onClick={[Function]}
+      size="small"
+      variant="contained"
+    >
+      Delete
+    </WithStyles(Button)>
+  </div>
+</WithStyles(Card)>
+`;

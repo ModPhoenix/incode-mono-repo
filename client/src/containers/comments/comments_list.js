@@ -23,12 +23,20 @@ class CommentsList extends Component {
     if (!comments[taskId]) {
       return (
         <div>
-comments 0
+          comments 0
         </div>
       );
     }
 
-    return Object.keys(comments[taskId]).map(key => <CommentCard key={comments[taskId][key].id} taskId={taskId} comment={comments[taskId][key]} handleEdit={this.callbackEdit} />);
+    return Object.keys(comments[taskId])
+      .map(key => (
+        <CommentCard
+          key={comments[taskId][key].id}
+          taskId={taskId}
+          comment={comments[taskId][key]}
+          handleEdit={this.callbackEdit}
+        />
+      ));
   }
 
   render() {

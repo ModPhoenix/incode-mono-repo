@@ -28,7 +28,8 @@ module.exports = {
   },
   getById: (req, res, next) => {
     Task.findById(req.params.id, function (err, task) {
-      if (err) return next(err);
+      if (!task) return res.status(404).send("No task found.");
+      if (err) return res.status(500).send("There was a problem finding the task.");
       res.status(200).send(task);
     })
   },

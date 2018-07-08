@@ -3,6 +3,7 @@ import { userConstants } from '../_constants';
 const user = JSON.parse(localStorage.getItem('access_token'));
 const initialState = {
   isLoggedIn: !!user,
+  loggingIn: false,
   user: {
     isSuperuser: false,
   },
@@ -25,7 +26,11 @@ export default function AuthReducer(state = initialState, action) {
       };
     case userConstants.SIGN_UP_FAILURE:
     case userConstants.LOGIN_FAILURE:
-      return {};
+      return {
+        ...state,
+        loggingIn: false,
+        isLoggedIn: false,
+      };
     case userConstants.LOGOUT:
       return {
         ...state,
